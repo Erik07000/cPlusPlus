@@ -1,0 +1,30 @@
+#include <iostream> 
+
+int main()
+{
+    int a = 0;
+    int b = 0;
+    int min = 0;
+    int max = 0;
+    int sum = 0;
+    int k = 0;
+    std::cin >> a;
+    std::cin >> b;
+    min = b;
+    max = b;
+    if (a < 2)
+        std::cout << 0;
+    else
+    {
+        do {
+            std::cin >> b;
+            k++;
+            if (b > max)
+                max = b;
+            if (b < min)
+                min = b;
+        } while (k != a - 1);
+        sum = max - min;
+        std::cout << sum;
+    }
+}

@@ -1,0 +1,74 @@
+#include <vector>
+#include <iostream>
+#include <string>
+class Class
+{
+protected:
+	std::string ClassName{};
+	int CAP{};
+public:
+	Class() = default;
+	Class(const Class& p) = default;
+	Class(std::string name, int CP) : ClassName(name), CAP(CP) {}
+	~Class() {}
+};
+class Student : Class
+{
+protected:
+	std::string surname{};
+	std::string name{};
+	std::vector<int> grades;
+public:
+	Student() = default;
+	Student(const Student& p) = default;
+	Student(std::string classname, int CP, std::string surname, std::string name, std::vector<int> g) :Class(classname, CP), surname(surname), name(name), grades(g) {}
+	~Student() {}
+	std::string GetCName() {
+		return ClassName;
+	}
+	double GPA() {
+		double sum = 0;
+		for (int i = 0; i < 5; ++i)
+			sum += grades[i];
+		return sum / (5 * CAP);
+
+	}
+};
+
+int main()
+{
+	int n{};
+	int test1 = 0;
+	int test2 = 0;
+	bool check = false;
+	std::cin >> n;
+	std::vector<Student> CLASS{};
+	for (size_t i = 0; i < n; i++)
+	{
+		int Cap{};
+		std::string GroupName{};
+		std::cin >> GroupName >> Cap;
+		for (size_t j = 0; j < Cap; ++j)
+		{
+			std::string Name{};
+			std::string Surname{};
+			std::cin >> Surname >> Name;
+			std::vector<int> grades(5);
+			for (size_t k = 0; k < grades.size(); k++)
+			{
+				std::cin >> grades[k];
+			}
+			CLASS.push_back(Student(GroupName, Cap, Surname, Name, grades));
+		}
+
+	}
+	Student max = CLASS[0];
+
+	for (int i = 1; i < CLASS.size(); ++i) {
+		if (CLASS[i].GPA() > max.GPA())
+		{
+			max = CLASS[i];
+		}
+	}
+	std::cout << max.GetCName();
+}

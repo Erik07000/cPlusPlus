@@ -1,0 +1,20 @@
+#include <iostream> 
+
+int main()
+{
+    char first{};
+    char second{};
+    std::cin >> first >> second;
+    int firstch = first;
+    int secondch = second;
+    if (first > second)
+    {
+        std::cout << "YES";
+    }
+    else if (first == second) {
+        std::cout << "EQUAL";
+    }
+    else {
+        std::cout << "NO";
+    }
+}

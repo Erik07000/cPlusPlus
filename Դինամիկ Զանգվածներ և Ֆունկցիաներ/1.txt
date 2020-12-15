@@ -1,0 +1,16 @@
+#include <iostream> 
+
+int main()
+{
+    const int size = 20;
+    char arr[size];
+    std::cin >> arr;
+    char* ch = arr;
+    int count = 0;
+    while (*ch != '\0')
+    {
+        count++;
+        ch++;
+    }
+    std::cout << count;
+}

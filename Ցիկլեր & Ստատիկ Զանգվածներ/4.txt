@@ -1,0 +1,24 @@
+#include <iostream> 
+
+int main()
+{
+    int a;
+    bool test;
+    std::cin >> a;
+    for (int i = 2; i <= a; i++)
+    {
+        test = false;
+        for (int j = 2; j <= i / 2; j++)
+        {
+            if (i % j == 0)
+            {
+                test = true;
+                break;
+            }
+        }
+        if (test == false) {
+            std::cout << i << " ";
+
+        }
+    }
+}

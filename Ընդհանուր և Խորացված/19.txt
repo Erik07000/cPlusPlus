@@ -1,0 +1,115 @@
+#include <iostream>
+#include <vector>
+#include <string>
+class Book
+{
+protected:
+	std::string title{};
+public:
+	Book() = default;
+	Book(const Book& b) = default;
+	Book(std::string title) : title(title) {}
+	~Book() {}
+	std::string getTitle()
+	{
+		return title;
+	}
+};
+class FictionBook : public Book
+{
+private:
+	int sold{};
+	int totalAmount{};
+public:
+	FictionBook() = default;
+	FictionBook(const FictionBook&) = default;
+	FictionBook(std::string title, int sold, int totalAmount) :
+		Book(title), sold(sold), totalAmount(totalAmount) {}
+	~FictionBook() {}
+	double popularity()
+	{
+		return ((double)sold / totalAmount) * sold / 1000.0;
+	}
+};
+class ScientificBook : public Book
+{
+private:
+	int cost{};
+	int pages{};
+	int lib{};
+public:
+	ScientificBook() = default;
+	ScientificBook(const ScientificBook&) = default;
+	ScientificBook(std::string title, int cost, int pages, int lib) :
+		Book(title), cost(cost), pages(pages), lib(lib) {};
+	~ScientificBook() {}
+	double expensive()
+	{
+		return (double)cost / pages;
+	}
+	int getLib()
+	{
+		return lib;
+	}
+};
+int main()
+{
+	int n{};
+	std::cin >> n;
+	std::vector<FictionBook> fictionBooks{};
+	for (int i = 0; i < n; ++i)
+	{
+		std::string title{};
+		int totalAmount{};
+		int sold{};
+		std::cin >> title >> totalAmount >> sold;
+		fictionBooks.push_back(FictionBook(title, sold, totalAmount));
+	}
+	int m{};
+	std::cin >> m;
+	std::vector<ScientificBook> scientificBooks{};
+	for (int i = 0; i < m; ++i)
+	{
+		std::string title{};
+		int cost{};
+		int pages{};
+		int lib{};
+		std::cin.ignore();
+		std::getline(std::cin, title);
+		std::cin >> cost >> pages >> lib;
+		scientificBooks.push_back(ScientificBook(title, cost, pages, lib));
+	}
+	double maxPopularity = -1;
+	for (size_t i = 0; i < fictionBooks.size(); ++i)
+	{
+		if (fictionBooks[i].popularity() > maxPopularity)
+			maxPopularity = fictionBooks[i].popularity();
+	}
+	for (size_t i = 0; i < fictionBooks.size(); ++i)
+	{
+		if (fictionBooks[i].popularity() == maxPopularity)
+			std::cout << fictionBooks[i].getTitle() << "\n";
+	}
+	double avgExp = 0;
+	for (size_t i = 0; i < scientificBooks.size(); ++i)
+		avgExp += scientificBooks[i].expensive();
+	avgExp /= scientificBooks.size();
+	int maxIndex = 0;
+	for (size_t i = 0; i < scientificBooks.size(); ++i)
+	{
+		if (scientificBooks[i].getLib() > scientificBooks[maxIndex].getLib())
+			maxIndex = i;
+	}
+	bool isFound = false;
+	for (size_t i = 0; i < scientificBooks.size(); ++i)
+	{
+		if (scientificBooks[i].expensive() < avgExp
+			&& scientificBooks[i].getLib() == scientificBooks[maxIndex].getLib())
+		{
+			std::cout << scientificBooks[i].getTitle() << "\n";
+			isFound = true;
+		}
+	}
+	if (isFound == false)
+		std::cout << "Not found!";
+}

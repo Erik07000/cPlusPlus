@@ -1,0 +1,36 @@
+#include <iostream> 
+
+int main()
+{
+    char string[21];
+    char string1[21];
+    std::cin >> string >> string1;
+    int length = 0;
+    while (string[length] != '\0')
+    {
+        ++length;
+    }
+    int lenght1 = 0;
+    while (string1[lenght1] != '\0')
+    {
+        ++lenght1;
+    }
+    bool isSub = false;
+    for (int i = 0; i < length - lenght1 + 1; ++i) {
+        isSub = true;
+        for (int j = 0; j < lenght1; ++j)
+        {
+            if (string[i + j] != string1[j])
+            {
+                isSub = false;
+                break;
+            }
+        }
+        if (isSub)
+            break;
+    }
+    if (isSub)
+        std::cout << "YES";
+    else
+        std::cout << "NO";
+}

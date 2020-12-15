@@ -1,0 +1,109 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+
+
+
+class shape
+{
+public:
+	virtual double perimeter() = 0;
+};
+class Cube : public shape
+{
+protected:
+	double a{};
+public:
+	Cube() = default;
+	Cube(const Cube& c) = default;
+	~Cube() {};
+	Cube(double A) : a(A) {};
+	double volume = a * a * a;
+	virtual double perimeter()
+	{
+		return volume;
+	}
+};
+
+
+
+
+class Pyramid : public shape
+{
+protected:
+	double a{};
+	double h{};
+public:
+	Pyramid() = default;
+	Pyramid(const Pyramid& p) = default;
+	~Pyramid() {};
+	Pyramid(double A, double B) : a(A), h(B) {};
+	double volume = ((a * a) * h) / 3;
+	virtual double perimeter()
+	{
+		return volume;
+	}
+};
+
+
+
+
+class Ball : public shape
+{
+protected:
+	double r{};
+	double P{};
+public:
+	Ball() = default;
+	Ball(const Ball& b) = default;
+	~Ball() {};
+	Ball(double A, double p) : r(A), P(p) {};
+	double volume = (((P * (r * r * r)) * 4) / 3);
+	virtual double perimeter()
+	{
+		return volume;
+	}
+};
+
+
+
+
+int main()
+{
+	int n{};
+	std::cin >> n;
+	std::vector<shape*> arr;
+	for (int i = 0; i < n; ++i)
+	{
+		std::string shapeName{};
+		std::cin >> shapeName;
+		if (shapeName == "Pyramid")
+		{
+			double a{};
+			double h{};
+			std::cin >> a >> h;
+			arr.push_back(new Pyramid(a, h));
+		}
+		else if (shapeName == "Cube")
+		{
+			double b{};
+			std::cin >> b;
+			arr.push_back(new Cube(b));
+		}
+		else if (shapeName == "Ball")
+		{
+			double p = 3.1415;
+			double r{};
+			std::cin >> r;
+			arr.push_back(new Ball(r, p));
+		}
+	}
+	double sum{};
+	for (int i = 0; i < arr.size(); ++i)
+	{
+		sum += arr[i]->perimeter();
+		delete arr[i];
+	}
+	std::cout << sum;
+}

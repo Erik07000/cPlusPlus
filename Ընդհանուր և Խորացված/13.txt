@@ -1,0 +1,70 @@
+#include <vector>
+#include <iostream>
+#include <string>
+class Group
+{
+protected:
+	std::string GroupName{};
+	int CAP{};
+public:
+	Group() = default;
+	Group(const Group& p) = default;
+	Group(std::string name, int CP) : GroupName(name), CAP(CP) {}
+	~Group() {}
+};
+class Worker : Group
+{
+protected:
+	std::string surname{};
+	std::string name{};
+	int Year{};
+public:
+	Worker() = default;
+	Worker(const Worker& p) = default;
+	Worker(std::string groupname, int CP, std::string surname, std::string name, int Year) : Group(groupname, CP), surname(surname), name(name), Year(Year) {}
+	~Worker() {}
+	std::string GetGName() {
+		return GroupName;
+	}
+	std::string Name() {
+		return surname + " " + name;
+	}
+};
+
+int main()
+{
+	int n{};
+	int numb = 0;
+	bool check = false;
+	std::cin >> n;
+	std::vector<Worker> Groups{};
+	std::vector<std::string> SN{};
+	for (size_t i = 0; i < n; i++)
+	{
+		int Cap{};
+		std::string GroupName{};
+		std::cin >> GroupName >> Cap;
+		for (size_t j = 0; j < Cap; ++j)
+		{
+			std::string Name{};
+			int Year{};
+			std::string Surname{};
+			std::cin >> Surname >> Name >> Year;
+			Groups.push_back(Worker(GroupName, Cap, Surname, Name, Year));
+			if (GroupName == "A-15")
+			{
+				SN.push_back(Groups[numb].Name());
+				numb++;
+				check = true;
+			}
+		}
+
+	}
+	for (size_t i = 0; i < SN.size(); i++)
+	{
+		std::cout << SN[i] << "\n";
+	}
+	if (check == false) {
+		std::cout << "Not found!";
+	}
+}

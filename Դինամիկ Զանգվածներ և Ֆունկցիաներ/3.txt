@@ -1,0 +1,29 @@
+#include <iostream> 
+
+int main()
+{
+    char string[20];
+    std::cin >> string;
+    int l = 0;
+    char* ch = string;
+    int count = 0;
+    while (*ch != '\0')
+    {
+        count++;
+        ch++;
+    }
+    int h = count - 1;
+    while (h > l)
+    {
+        if (string[l++] != string[h--]) {
+            std::cout << "NO";
+            break;
+        }
+        else
+        {
+            std::cout << "YES";
+            break;
+        }
+    }
+
+}

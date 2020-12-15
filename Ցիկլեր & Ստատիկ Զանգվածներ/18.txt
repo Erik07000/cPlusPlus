@@ -1,0 +1,33 @@
+#include <iostream> 
+
+int main()
+{
+    const int size = 1000;
+    int a[size];
+    int quantity = 0;
+    int check = 0;
+    int index = 0;
+    std::cin >> quantity;
+    for (int i = 0; i < quantity; i++)
+    {
+        std::cin >> a[i];
+    }
+    for (int k = 0; k < quantity; k++) {
+        if (a[k] < check) {
+            check = a[k];
+            index = k;
+        }
+    }
+    for (int k = 0; k < quantity; k++) {
+        if (a[k] > check && a[k] < 0) {
+            check = a[k];
+            index = k;
+        }
+    }
+    if (check != 0)
+        std::cout << check << " " << index;
+    else
+    {
+        std::cout << "0" << " " << "-1";
+    }
+}

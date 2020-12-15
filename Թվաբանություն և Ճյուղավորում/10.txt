@@ -1,0 +1,9 @@
+#include <iostream> 
+
+int main()
+ {
+   char symb = 'z' ;
+   char symb1 = 'a' ;
+   int count = symb - symb1 + 1 ;
+   std::cout << count ; 
+}

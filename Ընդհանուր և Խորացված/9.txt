@@ -1,0 +1,73 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <stack>
+int main()
+{
+	std::string str;
+	std::cin >> str;
+	std::stack<char> myStack;
+	bool isCorrect = true;
+	for (int i = 0; i < str.size(); ++i)
+	{
+		if (str[i] == '(')
+			myStack.push(str[i]);
+		else if (str[i] == ')')
+		{
+			if (myStack.empty())
+			{
+				isCorrect = false;
+				break;
+			}
+			if (myStack.top() == '(') {
+				myStack.pop();
+			}
+			else
+			{
+				isCorrect = false;
+				break;
+			}
+		}
+		if (str[i] == '[')
+			myStack.push(str[i]);
+		else if (str[i] == ']')
+		{
+			if (myStack.empty())
+			{
+				isCorrect = false;
+				break;
+			}
+			if (myStack.top() == '[') {
+				myStack.pop();
+			}
+			else
+			{
+				isCorrect = false;
+				break;
+			}
+		}if (str[i] == '{')
+			myStack.push(str[i]);
+		else if (str[i] == '}')
+		{
+			if (myStack.empty())
+			{
+				isCorrect = false;
+				break;
+			}
+			if (myStack.top() == '{') {
+				myStack.pop();
+			}
+			else
+			{
+				isCorrect = false;
+				break;
+			}
+		}
+	}
+	if (myStack.empty() == false)
+		isCorrect = false;
+	if (isCorrect)
+		std::cout << "YES";
+	else
+		std::cout << "NO";
+}

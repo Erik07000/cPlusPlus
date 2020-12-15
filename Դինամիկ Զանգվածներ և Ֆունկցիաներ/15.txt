@@ -1,0 +1,60 @@
+#include <iostream> 
+
+int main()
+{
+    const int n = 6;
+    int matrix[n][n]{};
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            std::cin >> matrix[i][j];
+    const int R = 0;
+    const int D = 1;
+    const int L = 2;
+    const int U = 3;
+    int dir = R;
+    int row = 0;
+    int col = 0;
+    int TS = n - 1;
+    int CS = 0;
+    for (int i = 0; i < n * n; i++) {
+        std::cout << matrix[row][col] << " ";
+        if (dir == R && CS == TS) {
+            dir = D;
+            CS = 0;
+            --TS;
+        }
+        else if (dir == D && CS == TS) {
+            dir = L;
+            CS = 0;
+        }
+        else if (dir == L && CS == TS)
+        {
+            dir = U;
+            CS = 0;
+            --TS;
+        }
+        else if (dir == U && CS == TS)
+        {
+            dir = R;
+            CS = 0;
+        }
+        else
+            ++CS;
+
+        switch (dir)
+        {
+        case R:
+            ++col;
+            break;
+        case D:
+            ++row;
+            break;
+        case L:
+            --col;
+            break;
+        case U:
+            --row;
+            break;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+#include <iostream> 
+#include <limits.h>
+int main()
+{
+    const int size = 5;
+    const int size1 = 10;
+    int arr[size][size1];
+    int arr1[size1][size];
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size1; j++)
+        {
+            std::cin >> arr[i][j];
+            arr1[j][i] = arr[i][j];
+        }
+    }
+    for (int i = 0; i < size1; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            std::cout << arr1[i][j] << " ";
+        }
+        std::cout << "\n";
+    }
+}

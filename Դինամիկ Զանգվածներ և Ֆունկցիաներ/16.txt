@@ -1,0 +1,30 @@
+#include <iostream> 
+#include <limits.h>
+void simple(int n) 
+{
+    bool test = false;
+    if (n < 2)
+    {
+        test = true;
+    }
+    else {
+        for (int j = 2; j <= n / 2; j++)
+        {
+            if (n % j == 0)
+            {
+                test = true;
+                break;
+            }
+        }
+    }
+    if (test == true)
+        std::cout << "NO";
+    else
+        std::cout << "YES";
+}
+int main()
+{
+        int n;
+        std::cin >> n;
+        simple(n);
+}

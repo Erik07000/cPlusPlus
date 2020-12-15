@@ -1,0 +1,87 @@
+#include <iostream>
+#include <vector>
+#include <string>
+class Book
+{
+protected:
+	std::string Name{};
+	std::string Surname{};
+public:
+	Book() = default;
+	Book(const Book& b) = default;
+	Book(std::string name, std::string surname) : Name(name), Surname(surname) {}
+	~Book() {}
+	std::string getNS()
+	{
+		return Name + " " + Surname;
+	}
+};
+class FictionBook : public Book
+{
+private:
+	std::string genre{};
+public:
+	FictionBook() = default;
+	FictionBook(const FictionBook&) = default;
+	FictionBook(std::string name, std::string surname, std::string genre) :
+		Book(name, surname), genre(genre) {}
+	~FictionBook() {}
+	std::string getGENRE() {
+		return genre;
+	}
+};
+class ScientificBook : public Book
+{
+private:
+	std::string field{};
+public:
+	ScientificBook() = default;
+	ScientificBook(const ScientificBook&) = default;
+	ScientificBook(std::string name, std::string surname, std::string field) :
+		Book(name, surname), field(field) {};
+	~ScientificBook() {}
+	std::string getFIELD() {
+		return field;
+	}
+};
+int main()
+{
+	bool isFound = false;
+	int n{};
+	std::cin >> n;
+	std::vector<FictionBook> fictionBooks{};
+	for (int i = 0; i < n; ++i)
+	{
+		std::string Name{};
+		std::string Surname{};
+		std::string genre{};
+		std::cin >> Name >> Surname >> genre;
+		fictionBooks.push_back(FictionBook(Name, Surname, genre));
+	}
+	int m{};
+	std::cin >> m;
+	std::vector<ScientificBook> scientificBooks{};
+	for (int i = 0; i < m; ++i)
+	{
+		std::string Name{};
+		std::string Surname{};
+		std::string field{};
+		std::cin >> Name >> Surname >> field;
+		scientificBooks.push_back(ScientificBook(Name, Surname, field));
+	}
+	for (size_t i = 0; i < scientificBooks.size(); i++)
+	{
+		for (size_t j = 0; j < fictionBooks.size(); j++)
+		{
+			if (fictionBooks[j].getGENRE() == "poem" && scientificBooks[i].getFIELD() == "mathematics" &&
+				fictionBooks[j].getNS() == scientificBooks[i].getNS())
+			{
+				std::cout << scientificBooks[i].getNS();
+				isFound = true;
+			}
+		}
+	}
+	if (isFound == false)
+		std::cout << "Not found!";
+
+}

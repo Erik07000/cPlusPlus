@@ -1,0 +1,29 @@
+#include <iostream> 
+#include <limits.h>
+#include <math.h>
+long double factorial(long double n)
+{
+    long double res = 1;
+    for (int i = 2; i <= n; i++) {
+        res = res * i;
+    }
+    res = res / (n + 1);
+    return res;
+}
+int main()
+{
+    long double n = 10;
+    long double t = 0;
+    long double check = 0;
+    n = factorial(n);
+    for (long double j = 1; j < 11; j++) {
+        t = 1;
+        for (long double i = 2; i <= j; i++) {
+            t = t * i;
+        }
+        t = t / (j + 1);
+        check = check + t;
+    }
+    std::cout.precision(11);
+    std::cout << check;
+}

@@ -1,0 +1,5 @@
+#include <iostream>
+int main() {
+
+	int symb3; std::cin >> symb3; char symb = '@' + symb3; char symb2 = '`' + symb3; std::cout << symb2 << " " << symb;
+}

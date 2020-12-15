@@ -1,0 +1,33 @@
+#include <iostream> 
+#include <limits.h>
+#include <math.h>
+double factorial(double n) {
+    if (n <= 1) {
+        return 1;
+    }
+    else {
+        return n * factorial(n - 1);
+    }
+}
+double fib(double n)
+{
+    double a = 0, b = 1, c, i;
+    if (n == 0)
+        return a;
+    for (i = 2; i <= n; i++)
+    {
+        c = a + b;
+        a = b;
+        b = c;
+    }
+    return b;
+}
+int main() {
+    double n{};
+    std::cin >> n;
+    double fact = factorial(n);
+    double fibo = fib(n);
+    double ratio = fact / fibo;
+    std::cout.precision(10);
+    std::cout << ratio;
+}

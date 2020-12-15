@@ -1,0 +1,9 @@
+#include <iostream> 
+
+int main()
+{
+    int b{};
+    std::cin >> b;
+    for (int i = 10; i <= b; i++)
+        std::cout << i << " ";
+}

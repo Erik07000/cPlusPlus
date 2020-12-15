@@ -1,0 +1,88 @@
+#include <vector>
+#include <iostream>
+#include <string>
+class Group
+{
+protected:
+	std::string GroupName{};
+	int CAP{};
+public:
+	Group() = default;
+	Group(const Group& p) = default;
+	Group(std::string name, int CP) : GroupName(name), CAP(CP) {}
+	~Group() {}
+};
+class Worker : Group
+{
+protected:
+	std::string name{};
+	std::string surname{};
+	int Year{};
+public:
+	Worker() = default;
+	Worker(const Worker& p) = default;
+	Worker(std::string groupname, int CP, std::string surname, std::string name, int Year) : Group(groupname, CP), surname(surname), name(name), Year(Year) {}
+	~Worker() {}
+	int YEAR() {
+		return Year;
+	}
+	std::string GetGName() {
+		return GroupName;
+	}
+};
+
+int main()
+{
+	int n{};
+	bool test = true;
+	bool check = false;
+	std::cin >> n;
+	std::vector<Worker> Groups{};
+	std::string nametest{}, nametest1{};
+	for (size_t i = 0; i < n; i++)
+	{
+		int Cap{};
+		std::string GroupName{};
+		std::cin >> GroupName >> Cap;
+		for (size_t j = 0; j < Cap; ++j)
+		{
+			std::string Surname{};
+			std::string Name{};
+			int Year{};
+			std::cin >> Surname >> Name >> Year;
+			Groups.push_back(Worker(GroupName, Cap, Surname, Name, Year));
+		}
+
+	}
+	nametest = Groups[0].GetGName();
+	for (size_t i = 0; i < Groups.size(); i++) {
+		nametest1 = nametest;
+		nametest = Groups[i].GetGName();
+
+		if (nametest1 != nametest)
+		{
+			if (test == true)
+			{
+				std::cout << Groups[i - 1].GetGName() << "\n";
+				check = true;
+			}
+			test = true;
+		}
+
+		if (Groups[i].YEAR() < 1975)
+		{
+			test = false;
+		}
+		if (i + 1 == Groups.size())
+		{
+			if (test == true)
+			{
+				std::cout << Groups[i].GetGName() << "\n";
+				check = true;;
+			}
+		}
+	}
+	if (check == false) {
+		std::cout << "Not found!";
+	}
+}

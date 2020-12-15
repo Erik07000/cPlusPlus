@@ -1,0 +1,13 @@
+#include <iostream>
+
+int main() {
+   unsigned long long x;
+   unsigned long long y;
+    std::cin >> x >> y;
+    if (x >= y) {
+        std::cout << x << std::endl;
+    }
+    else { std::cout << y;
+
+    }
+}

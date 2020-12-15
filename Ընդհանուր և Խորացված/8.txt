@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <limits.h>
+class school
+{
+private:
+	std::string name;
+	std::string surname;
+	std::vector <int> grades;
+public:
+	school(std::string n, std::string s, std::vector<int> g) : name(n), surname(s), grades(g) {}
+	double GPA() {
+		double sum = 0;
+		for (int i = 0; i < 5; ++i)
+			sum += grades[i];
+		return sum / 5;
+
+	}
+	std::string getName() {
+		return name + " " + surname;
+	}
+};
+int main()
+{
+	std::vector<school> arr;
+	int n{};
+	std::cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		std::string name;
+		std::string surname;
+		std::cin >> name >> surname;
+		std::vector <int> grades(5);
+		for (int i = 0; i < 5; i++)
+		{
+			std::cin >> grades[i];
+		}
+		school input(name, surname, grades);
+		arr.push_back(input);
+	}
+	school max = arr[0];
+
+	for (int i = 1; i < arr.size(); ++i) {
+		if (arr[i].GPA() > max.GPA())
+		{
+			max = arr[i];
+		}
+	}
+	std::cout << max.getName();
+}

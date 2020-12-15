@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+std::vector<int> merge(const std::vector<int>& arr1, const std::vector<int>& arr2)
+{
+	std::vector<int> merged;
+	int index1 = 0;
+	int index2 = 0;
+	while (index1 < arr1.size() && index2 < arr2.size())
+	{
+		if (arr1[index1] < arr2[index2])
+			merged.push_back(arr1[index1++]);
+		else
+			merged.push_back(arr2[index2++]);
+	}
+	while (index1 < arr1.size())
+		merged.push_back(arr1[index1++]);
+	while (index2 < arr2.size())
+		merged.push_back(arr2[index2++]);
+	return merged;
+}
+std::vector<int> mergeSort(const std::vector<int>& arr)
+{
+	if (arr.size() <= 1)
+		return arr;
+	int middle = arr.size() / 2;
+	std::vector<int> left(arr.begin(), arr.begin() + middle);
+	std::vector<int> right(arr.begin() + middle, arr.end());
+	left = mergeSort(left);
+	right = mergeSort(right);
+	return merge(left, right);
+}
+int main() {
+	int size = 0;
+	int input{};
+	std::vector<int> arr;
+	std::cin >> size;
+	for (int i = 0; i < size; i++)
+	{
+		std::cin >> input;
+		arr.push_back(input);
+	}
+	std::vector <int> result = mergeSort(arr);
+	reverse(result.begin(), result.end());
+	for (int i = 0; i < size; i++) {
+		std::cout << result[i] << " ";
+	}
+}

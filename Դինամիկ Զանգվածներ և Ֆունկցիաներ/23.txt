@@ -1,0 +1,23 @@
+#include <iostream> 
+#include <limits.h>
+#include <math.h>
+long double cheb(long double n, long double x) {
+    if (n == 0)
+        return 1;
+    else if (n == 1)
+        return x;
+    else {
+        long double a;
+        a = 2 * x * cheb(n - 1, x) - cheb(n - 2, x);
+        return a;
+    }
+}
+int main() {
+    long double n{};
+    long double x{};
+    long double result{};
+    std::cin >> n >> x;
+    result = cheb(n, x);
+    std::cout.precision(15);
+    std::cout << result;
+}

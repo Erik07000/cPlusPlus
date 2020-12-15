@@ -1,0 +1,22 @@
+#include <iostream> 
+#include <limits.h>
+#include <math.h>
+int bgn(int a, int b) {
+    if (a == 0)
+        return b;
+    if (b == 0)
+        return a;
+    if (a == b)
+        return a;
+    if (a > b)
+        return bgn(a - b, b);
+    return bgn(a, b - a);
+}
+int main() {
+    int a{};
+    int b{};
+    int result{};
+    std::cin >> a >> b;
+    result = bgn(a, b);
+    std::cout << result;
+}

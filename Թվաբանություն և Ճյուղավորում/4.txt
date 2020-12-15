@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    double number1 = 0;
+    double number2 = 0;
+    double number3 = 0;
+    double result = 0;
+
+    cin >> number1 >> number2 >> number3;
+
+    result = ((number1 + number2)/2) * number3;
+
+    cout << result;
+}

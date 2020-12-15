@@ -1,0 +1,84 @@
+#include <iostream> 
+
+int main()
+{
+    char string[21];
+    char string1[21];
+    std::cin >> string >> string1;
+    char* ch = string;
+    char* ch1 = string1;
+    int count = 0;
+    int count1 = 0;
+    int len = 0;
+    int i = 0;
+    while (*ch != '\0')
+    {
+        count++;
+        ch++;
+    }
+    while (*ch1 != '\0')
+    {
+        count1++;
+        ch1++;
+    }
+    if (count != count1) {
+        std::cout << "NO";
+    }
+    else
+    {
+        int num = 0;
+        int k = 0;
+        while (k < count)
+        {
+            int max = -2147483647;
+            for (int i = count - 1; i >= k; i--)
+            {
+                if (string[i] > max)
+                {
+                    max = string[i];
+                    num = i;
+                }
+            }
+            for (int i = num; i >= k; i--)
+            {
+                string[i] = string[i - 1];
+            }
+            string[k] = max;
+            k++;
+        }
+        int num1 = 0;
+        int l = 0;
+        while (l < count1)
+        {
+            int max1 = -2147483647;
+            for (int i = count1 - 1; i >= l; i--)
+            {
+                if (string1[i] > max1)
+                {
+                    max1 = string1[i];
+                    num1 = i;
+                }
+            }
+            for (int i = num1; i >= l; i--)
+            {
+                string1[i] = string1[i - 1];
+            }
+            string1[l] = max1;
+            l++;
+        }
+        bool istrue = true;
+        for (i = 0; i < count; i++)
+        {
+            if (string[i] != string1[i])
+            {
+                istrue = false;
+                break;
+            }
+        }
+        if (istrue)
+            std::cout << "YES";
+        else
+            std::cout << "NO";
+    }
+
+}

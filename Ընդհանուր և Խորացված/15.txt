@@ -1,0 +1,103 @@
+#include <iostream>
+#include <string>
+#include <vector>
+class shape
+{
+public:
+	virtual double perimeter() = 0;
+};
+class triangle : public shape
+{
+protected:
+	double CA{};
+	double h{};
+public:
+	triangle() = default;
+	triangle(const triangle& t) = default;
+	~triangle() {};
+	triangle(double A, double H) : CA(A), h(H) {};
+	double perimeter()
+	{
+		return (CA / 2) * h;
+	}
+};
+class rectangle : public shape
+{
+protected:
+	double a{};
+	double b{};
+public:
+	rectangle() = default;
+	rectangle(const rectangle& r) = default;
+	~rectangle() {}
+	rectangle(double A, double B) : a(A), b(B) {};
+	virtual double perimeter()
+	{
+		return (a * b);
+	}
+};
+class Circle : public shape
+{
+protected:
+	double P = 3.1415;
+	double R{};
+public:
+	Circle() = default;
+	Circle(const Circle& c) = default;
+	~Circle() {}
+	Circle(double A) : R(A) {}
+	virtual double perimeter()
+	{
+		return P * (R * R);
+	}
+};
+int main()
+{
+	int n{};
+	std::cin >> n;
+	std::vector<shape*> arr;
+	std::vector<double> S(n);
+	std::vector<double> result;
+	for (int i = 0; i < n; ++i)
+	{
+		std::string shapeName{};
+		std::cin >> shapeName;
+		if (shapeName == "Rectangle")
+		{
+			double a{};
+			double b{};
+			std::cin >> a >> b;
+			arr.push_back(new rectangle(a, b));
+		}
+		else if (shapeName == "Triangle")
+		{
+			double CA{};
+			double H{};
+			std::cin >> CA >> H;
+			arr.push_back(new triangle(CA, H));
+		}
+		else if (shapeName == "Circle")
+		{
+			double R{};
+			std::cin >> R;
+			arr.push_back(new Circle(R));
+		}
+	}
+	double sum = 0;
+	for (int i = 0; i < arr.size(); ++i)
+	{
+		S[i] = arr[i]->perimeter();
+		delete arr[i];
+	}
+	for (int i = S.size() - 1; i >= 0; i--)
+	{
+		for (int j = 0; j < S.size() - 1; j++) {
+			if (S[j] < S[j + 1]) {
+				double tmp = S[j];
+				S[j] = S[j + 1];
+				S[j + 1] = tmp;
+			}
+		}
+		std::cout << S[i] << " ";
+	}
+}

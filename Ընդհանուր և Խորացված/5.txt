@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+#include <string>
+class TV
+{
+private:
+	std::string Tv;
+	std::string ICountry;
+	std::string RCountry;
+public:
+	TV(std::string s, std::string f, std::string t) : Tv(s), ICountry(f), RCountry(t) {}
+	std::string getICountry()
+	{
+		return ICountry;
+	}
+	std::string getTV() {
+		return Tv;
+	}
+	std::string getRCountry()
+	{
+		return RCountry;
+	}
+};
+int main()
+{
+	std::vector<TV> arr;
+	int n{};
+	bool check = false;
+	std::cin >> n;
+	for (int i = 0; i < n; ++i)
+	{
+		std::string Tv{};
+		std::string ICountry{};
+		std::string RCountry{};
+		std::cin >> Tv >> ICountry >> RCountry;
+		arr.push_back(TV(Tv, ICountry, RCountry));
+	}
+	std::string IC{};
+	std::string RC{};
+	std::cin >> IC >> RC;
+	for (size_t i = 0; i < arr.size(); ++i)
+	{
+		if (arr[i].getICountry() == IC && arr[i].getRCountry() == RC) {
+			std::cout << arr[i].getTV()<< "\n";
+			check = true;
+		}
+	}
+	if (check == false)
+	{
+		std::cout << "Not found!";
+	}
+}

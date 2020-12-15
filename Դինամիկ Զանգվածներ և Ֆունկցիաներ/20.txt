@@ -1,0 +1,19 @@
+#include <iostream> 
+#include <limits.h>
+#include <math.h>
+float Heron(float a, float b, float c) {
+    float p{};
+    float S{};
+    p = (a + b + c) / 2;
+    S = sqrt(p * (p - a) * (p - b) * (p - c));
+    return S;
+}
+int main() {
+    float a{};
+    float b{};
+    float c{};
+    float res{};
+    std::cin >> a >> b >> c;
+    res = Heron(a, b, c);
+    std::cout << res;
+}

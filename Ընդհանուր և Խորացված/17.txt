@@ -1,0 +1,59 @@
+#include <vector>
+#include <iostream>
+#include <string>
+class Person
+{
+protected:
+	std::string Name{};
+	std::string SurName{};
+public:
+	Person() = default;
+	Person(const Person& p) = default;
+	Person(std::string name, std::string surname) : Name(name), SurName(surname) {}
+	~Person() {}
+};
+class Employee : Person
+{
+protected:
+	std::string Position{};
+	int salary;
+public:
+	Employee() = default;
+	Employee(const Employee& p) = default;
+	Employee(std::string name, std::string surname, std::string position, int s) : Person(name, surname), Position(position), salary(s) {}
+	~Employee() {}
+	std::string GetSName() {
+		return SurName + " " + Position;
+	}
+	int GetSlary() {
+		return salary;
+	}
+};
+int main()
+{
+	int n{};
+	bool check = false;
+	double sum = 0;
+	double sum1 = 0;
+	std::cin >> n;
+	std::vector<Employee> Per{};
+	for (size_t i = 0; i < n; i++)
+	{
+		std::string Name{};
+		std::string Surname{};
+		std::string POS{};
+		int salary{};
+		std::cin >> Name >> Surname;
+		std::cin >> POS >> salary;
+		Per.push_back(Employee(Name, Surname, POS, salary));
+	}
+	for (int j = 0; j < n; ++j)
+		sum += Per[j].GetSlary();
+	sum1 = sum / n;
+	for (size_t i = 0; i < Per.size(); i++)
+	{
+		if (sum1 <= Per[i].GetSlary()) {
+			std::cout << Per[i].GetSName() << "\n";
+		}
+	}
+}

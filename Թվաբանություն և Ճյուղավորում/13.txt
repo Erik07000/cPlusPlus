@@ -1,0 +1,19 @@
+#include <iostream> 
+
+int main()
+ {
+  long long a = 0 ;
+  long long b = 0 ;
+  long long c = 0 ;
+  std::cin >> a >> b >> c ; 
+  if(a <= b & a <= c){
+    std::cout << a ;
+  } 
+  else if(b < a & b < c ){
+    std::cout<< b ;
+  }
+  else if (c < a & c< b){
+     std::cout << c ;
+  }
+  
+}

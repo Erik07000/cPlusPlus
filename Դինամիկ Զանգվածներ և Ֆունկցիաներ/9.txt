@@ -1,0 +1,28 @@
+#include <iostream> 
+
+int main()
+{
+    int size = 0;
+    std::cin >> size;
+    int* arr = new int[size];
+    int* arr1 = new int[size];
+    int check = 0;
+    bool test = false;
+    for (int i = 0; i < size; i++) {
+        std::cin >> arr[i];
+    }
+    for (int i = 0; i < size; i++) {
+        check = 0;
+        for (int j = 0; j < size; j++)
+        {
+            if (arr[i] == arr[j]) {
+                check++;
+
+            }
+        }
+        arr1[i] = check;
+    }
+    for (int i = 0; i < size; i++) {
+        std::cout << arr1[i] << " ";
+    }
+}

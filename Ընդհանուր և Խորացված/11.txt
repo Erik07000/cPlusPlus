@@ -1,0 +1,82 @@
+#include <iostream>
+#include <string>
+#include <queue>
+#include <vector>
+const int labirint_size = 8;
+struct pair
+{
+	int x;
+	int y;
+	pair(int X, int Y) : x(X), y(Y) {}
+	pair(std::string ChessCell) : x(ChessCell[0] - 'A'), y(ChessCell[1] - '1') {}
+	std::vector<pair> neighbours()
+	{
+		std::vector<pair> n;
+		if (x > 0)
+			n.push_back(pair(x - 1, y));
+		if (y > 0)
+			n.push_back(pair(x, y - 1));
+		if (x < labirint_size - 1)
+			n.push_back(pair(x + 1, y));
+		if (y < labirint_size - 1)
+			n.push_back(pair(x, y + 1));
+
+		if (x > 0 && y > 0)
+			n.push_back(pair(x - 1, y - 1));
+		if (x > 0 && y < labirint_size - 1)
+			n.push_back(pair(x - 1, y + 1));
+		if (x < labirint_size - 1 && y < labirint_size - 1)
+			n.push_back(pair(x + 1, y + 1));
+		if (x < labirint_size - 1 && y > 0)
+			n.push_back(pair(x + 1, y - 1));
+
+		return n;
+	}
+};
+int main()
+{
+	std::string WhiteKing{};
+	std::string BlackKing{};
+	std::cin >> WhiteKing >> BlackKing;
+	pair start(WhiteKing);
+	pair end(BlackKing);
+	int n{};
+	std::cin >> n;
+	int Road[labirint_size][labirint_size]{};
+	for (int i = 0; i < n; i++)
+	{
+		std::string inputCell{};
+		std::cin >> inputCell;
+		pair input(inputCell);
+		Road[input.x][input.y] = 1;
+	}
+	int Steps[labirint_size][labirint_size]{};
+	for (int i = 0; i < labirint_size; ++i)
+		for (int j = 0; j < labirint_size; ++j)
+			Steps[i][j] = -1;
+	std::queue<pair> q;
+	q.push(start);
+	Steps[start.x][start.y] = 0;
+	while (q.empty() == false)
+	{
+		pair current = q.front();
+		if (current.x == end.x && current.y == end.y)
+			break;
+		q.pop();
+
+		std::vector<pair> neighbours = current.neighbours();
+		for (int i = 0; i < neighbours.size(); ++i)
+		{
+			pair n = neighbours[i];
+			if (Road[n.x][n.y] == 0 && Steps[n.x][n.y] == -1)
+			{
+				q.push(n);
+				Steps[n.x][n.y] = Steps[current.x][current.y] + 1;
+			}
+		}
+	}
+	if (q.empty())
+		std::cout << "NO";
+	else
+		std::cout << "YES";
+}

@@ -1,0 +1,46 @@
+#include <iostream> 
+#include <limits.h>
+#include <math.h>
+int sum(int a, int b) {
+    int sum{};
+    sum = a + b;
+    return sum;
+}
+int sub(int a, int b) {
+    int sub{};
+    sub = a - b;
+    return sub;
+}
+int mult(int a, int b) {
+    int mult{};
+    mult = a * b;
+    return mult;
+}
+int diva(int a, int b) {
+    int div{};
+    div = a / b;
+    return div;
+}
+int per(int a, int b) {
+    int per{};
+    per = a % b;
+    return per;
+}
+int main() {
+    float res{};
+    int a{};
+    int b{};
+    char o{};
+    std::cin >> a >> b >> o;
+    if (o == '+')
+        res = sum(a, b);
+    else if (o == '-')
+        res = sub(a, b);
+    else if (o == '*')
+        res = mult(a, b);
+    else if (o == '/')
+        res = diva(a, b);
+    else if (o == '%')
+        res = per(a, b);
+    std::cout << res;
+}

@@ -1,0 +1,58 @@
+#include <iostream>
+#include <vector>
+#include <string>
+class train
+{
+private:
+	std::string startCity;
+	std::string startCity1;
+	std::string finalCity;
+	std::string trainNumber;
+	std::string day;
+public:
+	train(std::string s, std::string f, std::string t) : startCity(s), finalCity(f), trainNumber(t) {}
+	std::string getCity1()
+	{
+		return finalCity;
+	}
+	std::string getCity2() {
+		return startCity;
+	}
+	std::string getNumber()
+	{
+		return trainNumber;
+	}
+	std::string getDay() {
+		return day;
+	}
+};
+int main()
+{
+	std::vector<train> arr;
+	int n{};
+	bool check = false;
+	std::cin >> n;
+	for (int i = 0; i < n; ++i)
+	{
+		std::string scity{};
+		std::string fcity{};
+		std::string number{};
+		std::cin >> scity >> fcity >> number;
+		arr.push_back(train(scity, fcity, number));
+	}
+	std::string startCity{};
+	std::string startCity1{};
+	std::string finalCity{};
+	std::cin >> startCity >> finalCity >> startCity1;
+	for (size_t i = 0; i < arr.size(); ++i)
+	{
+		if (arr[i].getCity1() == finalCity && arr[i].getCity2() == startCity || arr[i].getCity1() == startCity1 && arr[i].getCity2() == finalCity) {
+			std::cout << arr[i].getNumber() << "\n";
+			check = true;
+		}
+	}
+	if (check == false)
+	{
+		std::cout << "Unreachable city!";
+	}
+}

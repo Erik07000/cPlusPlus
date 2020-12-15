@@ -1,0 +1,27 @@
+#include <iostream> 
+#include <limits.h>
+#include <math.h>
+long long rec(long long n) {
+    long long k{};
+    if (n <= 3) {
+        return k = n;
+    }
+    else if (n % 2 == 0 && n > 3) {
+        k = 3 + rec(n / 2);
+        return k;
+    }
+    else if (n % 2 != 0 && n > 3) {
+
+        k = 2 * rec(n + 3);
+        return k;
+    }
+
+}
+int main() {
+    long long n{};
+    long long result{};
+    std::cin >> n;
+    result = rec(n);
+    std::cout.precision(15);
+    std::cout << result;
+}

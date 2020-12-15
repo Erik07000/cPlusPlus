@@ -1,0 +1,29 @@
+#include <iostream> 
+
+int main()
+{
+    const int size = 100;
+    int a[size];
+    int quantity = 0;
+    int check = 0;
+    std::cin >> quantity;
+    for (int i = 0; i < quantity; i++)
+    {
+        std::cin >> a[i];
+    }
+    for (int k = 0; k < quantity; k++) {
+        check = 0;
+        for (int i = 0; i < quantity; i++)
+        {
+            if (a[k] == a[i])
+            {
+                check++;
+            }
+        }
+        if (check == 1)
+        {
+            std::cout << a[k] << " " << k;
+        }
+    }
+    
+}

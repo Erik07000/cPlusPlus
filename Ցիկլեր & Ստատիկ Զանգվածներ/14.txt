@@ -1,0 +1,30 @@
+#include <iostream> 
+
+int main()
+{
+    const int size = 10;
+    int arr[size];
+    int arr1[size];
+    bool check = true;
+    for (int i = 0; i < size; i++)
+    {
+        std::cin >> arr[i];
+    }
+    for (int i = 0; i < size; i++)
+    {
+        std::cin >> arr1[i];
+    }
+    for (int i = 0; i < size; i++) {
+        check = true;
+        for (int y = 0; y < size; y++) {
+            if (arr[i] == arr1[y])
+            {
+                check = false;
+                break;
+            }
+        }
+        if (check == true) {
+            std::cout << arr[i] << " ";
+        }
+    }
+}

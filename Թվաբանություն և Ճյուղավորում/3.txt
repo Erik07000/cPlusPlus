@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    long long number1 = 0;
+    long long number2 = 0;
+    long long divisible = 0;
+    cin >> number1 >> number2;
+
+    divisible = number1 % number2;
+
+    cout << divisible;

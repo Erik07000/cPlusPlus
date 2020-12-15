@@ -1,0 +1,105 @@
+#include <iostream>
+#include <vector>
+#include <limits.h>
+class Time
+{
+private:
+	int hours;
+	int minutes;
+public:
+	Time(int s, int f) : hours(s), minutes(f) {}
+	int getHour()
+	{
+		return hours;
+	}
+	int getMinutes() {
+		return minutes;
+	}
+};
+
+int main()
+{
+	std::vector<Time> arr;
+	int n{};
+	std::cin >> n;
+	int checkT = INT_MAX;
+	int checkM = INT_MAX;
+	int check1 = INT_MAX;
+	bool test = false;
+	int check{};
+	int checkT1 = INT_MAX;
+	int checkM1 = INT_MAX;
+	const int a = 720;
+	for (int i = 0; i < n; ++i)
+	{
+		int hours{};
+		int minutes{};
+		std::cin >> hours >> minutes;
+		if (hours <= 23 && hours >= 0 && minutes >= 0 && minutes <= 59)
+		{
+			arr.push_back(Time(hours, minutes));
+		}
+	}
+	for (size_t i = 0; i < arr.size(); ++i)
+	{
+		if (arr[i].getHour() * 60 + arr[i].getMinutes() > a)
+		{
+			check = (arr[i].getHour() * 60 + arr[i].getMinutes()) - a;
+			if (check < check1)
+			{
+				checkT = arr[i].getHour();
+				checkM = arr[i].getMinutes();
+				check1 = check;
+			}
+		}
+		else if ((arr[i].getHour() * 60 + arr[i].getMinutes()) < a)
+		{
+			check = a - (arr[i].getHour() * 60 + arr[i].getMinutes());
+			if (check < check1)
+			{
+				checkT = arr[i].getHour();
+				checkM = arr[i].getMinutes();
+				check1 = check;
+			}
+		}
+	}
+	check1 = INT_MAX;
+	for (size_t i = 0; i < arr.size(); ++i)
+	{
+		if (arr[i].getHour() * 60 + arr[i].getMinutes() == checkT * 60 + checkM) {
+			continue;
+		}
+		else if (((arr[i].getHour() * 60) + arr[i].getMinutes()) == a) {
+			checkT1 = arr[i].getHour();
+			checkM1 = arr[i].getMinutes();
+		}
+		else if (arr[i].getHour() * 60 + arr[i].getMinutes() > a)
+		{
+			check = (arr[i].getHour() * 60 + arr[i].getMinutes()) - a;
+			if (check < check1)
+			{
+				checkT1 = arr[i].getHour();
+				checkM1 = arr[i].getMinutes();
+				check1 = check;
+			}
+		}
+		else if ((arr[i].getHour() * 60 + arr[i].getMinutes()) < a)
+		{
+			check = a - (arr[i].getHour() * 60 + arr[i].getMinutes());
+			if (check < check1)
+			{
+				checkT1 = arr[i].getHour();
+				checkM1 = arr[i].getMinutes();
+				check1 = check;
+			}
+		}
+	}
+	if (checkT > checkT1)
+		std::cout << "\n" << checkT1 << " " << checkM1 << "\n" << checkT << " " << checkM;
+	else if (checkT < checkT1)
+		std::cout << "\n" << checkT << " " << checkM << "\n" << checkT1 << " " << checkM1;
+	else if (checkT == checkT1 && checkM > checkM1)
+		std::cout << "\n" << checkT1 << " " << checkM1 << "\n" << checkT << " " << checkM;
+	else if (checkT == checkT1 && checkM < checkM1)
+		std::cout << "\n" << checkT << " " << checkM << "\n" << checkT1 << " " << checkM1;
+}

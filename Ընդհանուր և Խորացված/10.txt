@@ -1,0 +1,64 @@
+#include <iostream>
+#include <string>
+#include <stack>
+#include <vector>
+const int labirint_size = 10;
+struct pair
+{
+	int x;
+	int y;
+	pair(int X, int Y) : x(X), y(Y) {}
+	std::vector<pair> neighbours()
+	{
+		std::vector<pair> n;
+		if (x > 0)
+			n.push_back(pair(x - 1, y));
+		if (y > 0)
+			n.push_back(pair(x, y - 1));
+		if (x < labirint_size - 1)
+			n.push_back(pair(x + 1, y));
+		if (y < labirint_size - 1)
+			n.push_back(pair(x, y + 1));
+		return n;
+	}
+	bool isEnd()
+	{
+		return x == labirint_size - 1 && y == labirint_size - 1;
+	}
+};
+int main()
+{
+	int Road[labirint_size][labirint_size]{};
+	for (int i = 0; i < labirint_size; ++i)
+		for (int j = 0; j < labirint_size; ++j)
+			std::cin >> Road[i][j];
+	int Steps[labirint_size][labirint_size]{};
+	for (int i = 0; i < labirint_size; ++i)
+		for (int j = 0; j < labirint_size; ++j)
+			Steps[i][j] = -1;
+	std::stack<pair> q;
+	q.push(pair(0, 0));
+	Steps[0][0] = 0;
+	while (q.empty() == false)
+	{
+		pair current = q.top();
+		if (current.isEnd())
+			break;
+		q.pop();
+
+		std::vector<pair> neighbours = current.neighbours();
+		for (int i = 0; i < neighbours.size(); ++i)
+		{
+			pair n = neighbours[i];
+			if (Road[n.x][n.y] == 0 && Steps[n.x][n.y] == -1)
+			{
+				q.push(n);
+				Steps[n.x][n.y] = Steps[current.x][current.y] + 1;
+			}
+		}
+	}
+	if (q.empty())
+		std::cout << "NO";
+	else
+		std::cout << "YES";
+}
